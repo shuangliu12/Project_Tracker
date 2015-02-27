@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20150223233410) do
+ActiveRecord::Schema.define(:version => 20150227051117) do
+
+  create_table "assignments", :force => true do |t|
+    t.string  "title"
+    t.text    "description"
+    t.integer "user_id"
+    t.integer "project_id"
+  end
 
   create_table "models", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -31,6 +38,15 @@ ActiveRecord::Schema.define(:version => 20150223233410) do
   add_index "models", ["email"], :name => "index_models_on_email", :unique => true
   add_index "models", ["reset_password_token"], :name => "index_models_on_reset_password_token", :unique => true
 
+  create_table "projects", :force => true do |t|
+    t.string   "name",        :null => false
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "create_at"
+    t.datetime "start_date"
+    t.datetime "end_date"
+  end
+
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
     t.string   "encrypted_password",     :default => "", :null => false
@@ -42,6 +58,11 @@ ActiveRecord::Schema.define(:version => 20150223233410) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.string   "first_name",                             :null => false
+    t.string   "last_name",                              :null => false
+    t.string   "position"
+    t.integer  "company_id"
+    t.integer  "team_id"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
   end
